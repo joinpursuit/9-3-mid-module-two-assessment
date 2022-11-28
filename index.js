@@ -143,7 +143,14 @@ return find
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+const getAllMoviesReleasedAtOrBeforeYear = (movies,year) => {
+  let movieArray = []
+  if (!movies.length){
+    throw "Movies array is empty"
+  }
+  let find = movies.filter(movie => Number(movie.released.substring(7)) <= year)
+  return find || movieArray
+}
 
 /**
  * checkMinMetascores()
