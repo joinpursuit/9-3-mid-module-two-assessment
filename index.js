@@ -173,7 +173,8 @@ const exampleMovies = require("./movies");
 /**
  * checkMinMetascores()
  * -----------------------------
- * Returns either true or false depending whether all movies have a minimum metascore. If the movie array is empty, throw an error with a message.
+ * Returns either true or false depending whether all movies have a minimum metascore. If the movie array is empty, 
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {number} metascore - A minimum metascore number. (e.g. 80)
  * @returns {Boolean|Error} A boolean
@@ -184,7 +185,16 @@ const exampleMovies = require("./movies");
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+const checkMinMetascores = (movies, metascore) => {
+  if( !movies.length) {
+    throw 'No movies to check for metascore' // throw message if input movies array is empty
+  }
+  try {
+    return movies.every(movie => Number(movie.metascore) >= metascore) // every method to return true / false if all movies have a minimim metascore
+   } catch ( Error ){               // catch error if any
+     console.log( Error )
+   }
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
