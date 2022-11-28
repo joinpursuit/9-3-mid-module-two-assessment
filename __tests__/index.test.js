@@ -76,7 +76,7 @@ describe("checkIfAnyMovieHasRating()", () => {
   });
 });
 
-describe.only("findById()", () => {
+describe("findById()", () => {
   test("should use the `.find()` method", () => {
     const text = findById.toString();
     expect(text).toMatch(/\.find\(.*\)/s);
@@ -120,7 +120,7 @@ describe.only("findById()", () => {
   });
 });
 
-describe("filterByGenre()", () => {
+describe.only("filterByGenre()", () => {
   test("should use the `.filter()` method", () => {
     const text = filterByGenre.toString();
     expect(text).toMatch(/\.filter\(.*\)/s);
