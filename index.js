@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -142,10 +143,15 @@ function filterByGenre(movies, genre) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies) {
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   if(!movies.length){
-    throw "Error: movies array is empty"
+    throw "Error: movies array is empty!"
   }
+  return movies.filter((movie)=> {
+   const splitYear =movie.released.split("")
+   return parseInt(splitYear[2])<= year
+  })
+
  
 }
 
@@ -163,7 +169,12 @@ function getAllMoviesReleasedAtOrBeforeYear(movies) {
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movie, metascore) {
+  if(!movie.length){
+    throw "Error: movie array is empty!"
+  }
+  return movies.every((movie)=> Number (movie.metascore)> metascore);
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
