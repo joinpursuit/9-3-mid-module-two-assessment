@@ -105,9 +105,9 @@ const findById = (movies, id) => {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-const filterByGenre = (movies, genre) =>  {
-    const genreCase = genre.toLowerCase();
-return (movies.length ? movies.filter((movie) => movie.genre.toLowerCase().split(', ').includes(genreCase)) : error)
+const filterByGenre = (movies, genre) => {
+  const genreCase = genre.toLowerCase();
+  return (movies.length ? movies.filter((movie) => movie.genre.toLowerCase().split(', ').includes(genreCase)) : error)
 }
 
 /**
@@ -137,16 +137,11 @@ return (movies.length ? movies.filter((movie) => movie.genre.toLowerCase().split
 const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
   //if the movie array is empty //> error
   //if movie released year matches year param; return movie object
-const movieMatchesYear = (movies, year) => {
-  return movies.filter((movie) => Number(movie.released.slice(7)) <= year )
+  const movieMatchesYear = (movies, year) => {
+    return movies.filter((movie) => Number(movie.released.slice(7)) <= year)
+  }
+  return (movies.length ? movieMatchesYear(movies, year) : error)
 }
-return (movies.length ? movieMatchesYear(movies, year) : error)
-}
-
- 
-
-
-
 
 /**
  * checkMinMetascores()
@@ -162,7 +157,12 @@ return (movies.length ? movieMatchesYear(movies, year) : error)
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() { }
+const checkMinMetascores = (movies, metascore) => {
+  if (!movies.length) {
+    throw error
+  }
+  return movies.every((movie) => movie.metascore > metascore)
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
