@@ -128,7 +128,7 @@ const exampleMovies = require("./movies");
     throw 'No movies to filter by the given genre' // throw message if input movies array is empty
   }
   try {
-    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] // filter method to return full movie object or return null if id does not match
+    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] // filter method to return full movie object or return [] if genre does not match
    } catch ( Error ){               // catch error if any
      console.log( Error )
    }
@@ -137,7 +137,8 @@ const exampleMovies = require("./movies");
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
  * -----------------------------
- * Returns all movie objects with a `released` year equal to or less than the given year. If the movie array is empty, throw an error with a message.
+ * Returns all movie objects with a `released` year equal to or less than the given year. If the movie array is empty,
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {number} year - A year as a number. (e.g. 2000)
  * @returns {Object[]|Error} An array of movies where the `released` year is equal to or less than the inputted year.
@@ -158,7 +159,16 @@ const exampleMovies = require("./movies");
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+ const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
+  if( !movies.length) {
+    throw 'No movies released before the specified year.' // throw message if input movies array is empty
+  }
+  try {
+    return movies.filter(movie => movie.released.slice(-4) <= year)// filter method to return full movie object if year released match
+   } catch ( Error ){               // catch error if any
+     console.log( Error )
+   }
+ }
 
 /**
  * checkMinMetascores()
