@@ -103,7 +103,8 @@ const exampleMovies = require("./movies");
 /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty, throw an error with a message. If no movies match the inputted `genre`, return `[]`.
+ * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty, 
+ * throw an error with a message. If no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]|Error} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -122,7 +123,16 @@ const exampleMovies = require("./movies");
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+ const filterByGenre = (movies,genre) => {
+  if( !movies.length) {
+    throw 'No movies to filter by the given genre' // throw message if input movies array is empty
+  }
+  try {
+    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] // filter method to return full movie object or return null if id does not match
+   } catch ( Error ){               // catch error if any
+     console.log( Error )
+   }
+ }
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
