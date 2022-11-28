@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -30,7 +31,14 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies."
+  }
+  // using .map to iterate through every element in the movie array and return the value of the .title key for every movie
+  return movies.map(movie => movie.title)
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +58,14 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  // if statement to throw an error message if movies array is empty  
+  if (!movies.length) {
+    throw "There are no inputted movies."
+  }
+  // using .some to determine if any element has a .rated key value that is equal to the rating parameter and return a boolean value 
+  return movies.some(movie => movie.rated === rating)
+}
 
 /**
  * findById()
@@ -68,7 +83,16 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies"
+  }
+  // using .find to an object/element in the movies array if the .imdbID key value is equal to the id parameter
+  // using the logical OR operator to return null if the boolean value of the operand to the left is falsy
+  return movies.find(movie => movie.imdbID === id) || null
+}
+
 
 /**
  * filterByGenre()
@@ -92,7 +116,15 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies"
+  }
+  // using .filter to iterate through the movies array and return elements that have a .genre key value that includes the genre parameter
+  // using .toLowerCase to make the function case-insensitive
+  return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()))
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +150,15 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies."
+  }
+  // using .filter to iterate through the movies array and return elements that have a released year equal to or less than the given year parameter
+  // using .slice to take the last 4 characters of the movie.released string
+  return movies.filter(movie => movie.released.slice(movie.released.length - 4) <= year)
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +174,15 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies."
+  }
+  // using .every to iterate through every element of the array and determine if the .metascore key value is greater than or equal to the metascore parameter
+  // returning a boolean value depending on result of filter method
+  return movies.every(movie => Number(movie.metascore) >= metascore)
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +208,17 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  // if statement to throw an error message if movies array is empty
+  if (!movies.length) {
+    throw "There are no inputted movies."
+  }
+// using .map to iterate through the movies array
+// using object shorthand to create a key with the value of the .title value of the current movie element
+// using object shorthand to create a value the key that was created with .title value
+// using .find to find an element that has the rating.source value equal to the "Rotten Tomatoes" string, and then adding .value to access the Rotten Tomatoes score
+  return movies.map(movie => ({[movie.title]: movie.ratings.find(rating => rating.source === "Rotten Tomatoes").value}))
+}
 
 // Do not change anything below this line.
 module.exports = {
