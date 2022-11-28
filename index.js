@@ -192,7 +192,17 @@ function checkMinMetascores(movies, score) {
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (!movies.length) {
+    throw console.error();
+  }
+  return movies.map((movie) => {
+    const obj = movie.ratings.find(
+      (rating) => rating.source === 'Rotten Tomatoes'
+    );
+    return { [movie.title]: obj.value };
+  });
+}
 
 // Do not change anything below this line.
 module.exports = {
