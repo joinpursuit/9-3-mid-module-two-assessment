@@ -30,7 +30,13 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  }
+  let movieTitles = movies.map(movie => movie.title); //Changes the movie element to just the movie.title instaed of the whole obj
+  return movieTitles;
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +56,13 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  }
+  let containsRating = movies.some(movie => movie.rated === rating); //Checks if any movie.rated is matching the given rating
+  return containsRating;
+}
 
 /**
  * findById()
@@ -68,7 +80,20 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  }
+  let foundById = movies.find(movie => { //finds the first movie thta matches the code below
+    if (movie.imdbID === id) { //Checking if the ids match then pushing th emovie title
+      return movie.title
+    }
+  })
+  if (foundById === undefined) { //If no movies are found return null
+    return null
+  }
+  return foundById
+}
 
 /**
  * filterByGenre()
@@ -92,7 +117,13 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  } 
+  let filtered = movies.filter(movie => movie.genre.toLowerCase().split(", ").includes(genre.toLowerCase())); //turns everything into lower case so it easier to compare. spilt the genre strinf so we can compare. then the use of .incles to check the array for the genre given
+    return filtered;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +149,15 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let filtered = movies.filter(movie => { //Filters based on the code below
+    let movieSplit = movie.released.split(" ") //Splits the string of movie.relase so it can be compared
+    if(parseInt(movieSplit[2]) <= year) { //Checks if the 3 element (which is the year) is less then of equal too the given year returns movie if so
+      return movie
+    }
+  })
+  return filtered;
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +173,13 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  }
+  let every = movies.every(movie => parseInt(movie.metascore) >= metascore); //Checks if every movie.metascore is greater then or equal to the given metascore
+  return every
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +205,18 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (!movies.length) { //If movie.length is = 0 then it will be falsy but the ! turns it into truthy
+    throw `no movies in the movies array`;
+  }
+  let mapsByRotten = movies.map(movie => { //Maps an array with the given code below
+  let obj = {}
+  let foundRotten = movie.ratings.find(movie => movie.source === "Rotten Tomatoes"); //finds the rotten tomatoes obj (since inside of map, you can use movie.filter instead of movies.filter)
+  obj[movie.title] = foundRotten.value //Defines the new obj with movie title as key and the value of the rotten tomatoes obj
+  return obj
+  });
+  return mapsByRotten
+}
 
 // Do not change anything below this line.
 module.exports = {
