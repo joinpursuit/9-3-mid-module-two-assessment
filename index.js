@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -32,7 +33,7 @@ const exampleMovies = require("./movies");
  */
 function getAllMovieTitles(movies) {
   if (movies.length == 0){
-    throw "Input array was empty."
+    throw "Input array was empty.";
   }
   else{
     return movies.map(m => m.title);
@@ -59,7 +60,7 @@ function getAllMovieTitles(movies) {
  */
 function checkIfAnyMovieHasRating(movies,rating="G") {
   if (movies.length == 0){
-    throw "Input array was empty."
+    throw "Input array was empty.";
   }
   else{
     return movies.some(m => m.rated == rating);
@@ -85,7 +86,7 @@ function checkIfAnyMovieHasRating(movies,rating="G") {
 function findById(movies,id) {
   let res = null;
   if (movies.length == 0){
-    throw "Input array was empty."
+    throw "Input array was empty.";
   }
   else{
     if (movies.find(m => m.imdbID == id)){
@@ -117,7 +118,14 @@ function findById(movies,id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies,genre) {
+  if (movies.length == 0){
+    throw "Input array was empty.";
+  }
+  else{
+    return movies.filter(m => m.genre.toLowerCase().includes(genre.toLowerCase()));
+  }
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
