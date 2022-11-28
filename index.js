@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -30,7 +31,20 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+let result = []; // create an empty array/object to push movie titles to.
+if (movies.length === 0) { //create a condition that allows for error to be thrown.
+  throw "There are no movies."
+}
+
+const movieTitles = movies.map((movie) => {
+  result.push(movie.title);
+ //write the map function to iterate over the movies array  and the push movie title to result
+  
+})
+
+return result; //return the empty array
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +64,22 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating) {
+  if (movies.length === 0) { //create a condition that calls for an error.
+    throw "There are no movies.";
+  }
+  const movieRatings = movies.some((movie) => {//use the some method to iterate over the movies array and find ratings.
+    if (!movie.rating ) {//write a condition that says if the rating does not exist the default rating is "G".
+     return movie.rating = "G"
+    }if (!movie.rating !== rating) {//write conditional that say if movie,rating matches raitng parameter return true or false if otherwise.
+      return false;
+    }else {
+      return true;
+    }
+
+  })
+  return movieRatings;//return the variable that contains the process of code
+}
 
 /**
  * findById()
@@ -68,7 +97,23 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+
+  
+  if (movies.length === 0) {
+    throw "There are no movies.";
+  }
+  const movieFinder = movies.find((movie) => {
+    if (movie.imdbID === id) {// if the 
+      return movie;// the movie that matche the id.
+    } if (!movie) {// if it's not the movie return null, however this is not passing the test.
+      return null;
+    }
+      
+    
+  })
+  return movieFinder;//returns the movie object.
+}
 
 /**
  * filterByGenre()
@@ -92,7 +137,21 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let result = [] // create an empty array to hold the right movies required by tests.
+  if (movies.length === 0) {//create a conditons that allows for an error to be thrown.
+    throw "There are no movies.";
+  }
+  const movieGenres = movies.filter((movie) => {// a variable that contains the filter process.
+    if (movie.genre.toLowerCase().includes(genre.toLowerCase())) {//for case insensitivty .toLowerCase to remove chances of missing a movie that fits the criteria also to limit errors.
+       result.push(movie);
+     
+    }
+  })
+  
+  return result;//return array
+
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +177,18 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let result = [];//create an empty that the movies will be pushed to.
+  if (movies.length === 0) {
+    throw "There are no movies."
+  }
+  return movies.filter((movie) => {//write proces of filter.
+    if (Number(movie.released.slice(-4)) <= year) {//change released year ot a number(Number()) and use slice to isolate the year of the release from released property string.
+     return result.push(movie)
+     
+    }
+  })
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +204,20 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) {
+    throw "There are no movies."
+  }
+const movieScore = movies.every((movie) => {// write process to iterate over movies array and check every metascorre.
+  if (movie.metascore >= metascore) {//write conditional that meets the criteria of test metascore fits within range set by tests.
+    return true;
+  }else {
+    return false;
+  }
+
+})
+return movieScore;
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,8 +243,16 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) {
+    throw "There are no movies."
+  }
+  return movies.map((movie) => {//write process to iterate over movies array using .map. Use .find to look at the ratings array.
+    return {[movie.title]: movie.ratings.find((movie => movie.source === "Rotten Tomatoes")).value}
 
+  })//return and create object that only gives movie title and ratings that are desingate to ROtten Tomatoes source with score (value). 
+  
+}
 // Do not change anything below this line.
 module.exports = {
   getAllMovieTitles,
