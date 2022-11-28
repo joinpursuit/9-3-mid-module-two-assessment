@@ -118,7 +118,9 @@ function filterByGenre(movies, genre) {
   }
   let arr = [];
   arr = movies.filter(movie => {
+    // first turing a string of movie genres into array 
     let arrOfGenres = movie.genre.split(', ');
+    // checking if that array includes the given genre and making case-incesetive 
     if (arrOfGenres.includes(genre[0].toUpperCase() + genre.slice(1).toLowerCase())) {
       return movie;
     }
@@ -155,6 +157,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   if (movies.length === 0) {
     throw "error";
   }
+  // within filter method turnig string into number and then comparing to a given year 
   let arr = movies.filter(movie => Number(movie.released.slice(7)) <= year);
   return arr;
 }
