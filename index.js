@@ -30,7 +30,17 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  const movieTitles = movies.map((movie) => { // creates array with all movie titles
+    return movie.title
+  })
+
+  return movieTitles 
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +60,17 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = 'G') {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  let ratingPresence = movies.some((movie) => { // returns true if the presence of the specified rating is found in any of the movies
+    return movie.rated === rating 
+  })
+
+  return ratingPresence
+}
 
 /**
  * findById()
@@ -68,7 +88,17 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  let moviePresence = movies.find((movie) => { // creates an array with the movie of the specified ID
+    return movie.imdbID === id
+  })
+
+  return moviePresence ? moviePresence : null // returns either the movie with the specified ID or null if the movie can not be found
+}
 
 /**
  * filterByGenre()
@@ -92,7 +122,17 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  const matchingGenre = movies.filter((movie) => { // Filters out the movies with the specified genre
+    return movie.genre.toLowerCase().includes(genre.toLowerCase())
+  })
+
+  return matchingGenre
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +158,16 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  const movieReleaseFilter = movies.filter((movie) => { // Filters out the movies with the specified release year(s)
+    return parseInt(movie.released.slice(-4)) <= year
+  })
+  return movieReleaseFilter
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +183,17 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+  const moviesHaveMetascore = movies.every((movie) => { // Checks if the movie's metascore reaches the minimum specified score
+    return parseInt(movie.metascore) >= metascore
+  })
+
+  return moviesHaveMetascore
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +219,64 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) { // Checks if the array submitted had any movies
+    throw "No movies have been inputted!"
+  }
+
+//   const movieRottenTomatoPairing = movies.map((movie) => {
+//     return {[movie.title]: (movie.ratings.map((rating) => 
+//       {rating}
+//   })
+// }
+  const movieRottenTomatoPairing = movies.map((movie) => {
+    return {[movie.title]: (movie.ratings.map((rating) => {
+      
+    }))}
+  })
+}
+// getRottenTomatoesScoreByMovie([{
+//   actors: "Tom Hanks, Tim Allen, Annie Potts, Tony Hale",
+//   awards: "Won 1 Oscar. Another 55 wins & 63 nominations.",
+//   boxOffice: "$434,038,008",
+//   country: "USA",
+//   releasedOnDVD: "01 Oct 2019",
+//   director: "Josh Cooley",
+//   genre: "Animation, Adventure, Comedy, Family, Fantasy",
+//   language: "English",
+//   metascore: "84",
+//   plot: 'When a new toy called "Forky" joins Woody and the gang, a road trip alongside old and new friends reveals how big the world can be for a toy.',
+//   poster:
+//     "https://m.media-amazon.com/images/M/MV5BMTYzMDM4NzkxOV5BMl5BanBnXkFtZTgwNzM1Mzg2NzM@._V1_SX300.jpg",
+//   production: "Pixar Animation Studios",
+//   rated: "G",
+//   ratings: [
+//     {
+//       source: "Internet Movie Database",
+//       value: "7.7/10",
+//     },
+//     {
+//       source: "Rotten Tomatoes",
+//       value: "97%",
+//     },
+//     {
+//       source: "Metacritic",
+//       value: "84/100",
+//     },
+//   ],
+//   released: "21 Jun 2019",
+//   response: "True",
+//   runtime: "100 min",
+//   title: "Toy Story 4",
+//   type: "movie",
+//   website: "N/A",
+//   writer:
+//     "John Lasseter (original story by), Andrew Stanton (original story by), Josh Cooley (original story by), Valerie LaPointe (original story by), Rashida Jones (original story by), Will McCormack (original story by), Martin Hynes (original story by), Stephany Folsom (original story by), Andrew Stanton (screenplay by), Stephany Folsom (screenplay by)",
+//   imdbID: "tt1979376",
+//   imdbRating: "7.7",
+//   imdbVotes: "214,286",
+// },
+// ])
 
 // Do not change anything below this line.
 module.exports = {
