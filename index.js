@@ -56,6 +56,7 @@ function getAllMovieTitles(movies) {
 function checkIfAnyMovieHasRating(movies, rating = "G") {
   if (movies.length === 0) { throw "No G rated movie" }
   return movies.some(movies => movies.rated === rating)
+  //this runs through the rated data for the movies to find some of the movies aka the the G rated movies
 
 }
 
@@ -112,7 +113,9 @@ function filterByGenre(movies, genre) {
   if (movies.length === 0) { throw [] }
 
   return movies.filter(movies => movies.genre.toLowerCase().split(", ").includes(genre.toLowerCase()))
+   //^-->returns desired movie genre w/ proper grammar settings aka Case-insensitive>toLowerCase()
 }
+  
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -141,6 +144,8 @@ function filterByGenre(movies, genre) {
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   if (movies.length === 0) { throw "Movie not found" }
   return movies.filter(movies => Number(movies.released.slice(-4)) <= year)
+  //.slice(-4)->4 is used to count back the 4 numbers in a year;Number(),this converts value to a clean number
+//those numbers are either less than or equal to a desired year you are looking for
 }
 
 /**
@@ -159,7 +164,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  */
 function checkMinMetascores(movies, metascore) {
   if (movies.metascore === 0) { throw "Error" }
-
+  //if (movies.metascore === 60) { throw true }-> didn't work, setting seperate number values didnt make the return either true or false
   return (movies.every(movies => movies.metascore >= metascore))
 
 
@@ -193,7 +198,7 @@ function getRottenTomatoesScoreByMovie(movies) {
   if (movies.length === 0) { throw "No movie score match" }
 
   return movies.map((movies) => { return { [movies.title]: movies.ratings.find(scoreObj => scoreObj.source === "Rotten Tomatoes").value } })
-
+//score & value data need to return the desired score of the movie, pay attention to the movie.js doc to make sure you catch all the info you need
 
 }
 
