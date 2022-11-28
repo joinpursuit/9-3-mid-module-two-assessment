@@ -56,7 +56,11 @@ function getAllMovieTitles(movies){
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-const checkIfAnyMovieHasRating = (movies, rating = "G") => movies.some(movie => movie.rated == "rating")
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if(movies.length==0){
+    throw "Input movies"
+  }
+  return movies.some(movie => movie.rated == rating)}
 
 /**
  * findById()
