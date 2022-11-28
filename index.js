@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -30,7 +31,11 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let titles = movies.map(Math)
+  return movies
+}
+
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +55,11 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies) {
+  const rating = ["G", "R"]
+  rating.some(Movie);
+return `true`
+}
 
 /**
  * findById()
@@ -68,7 +77,11 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies) {
+  const array = []
+  const found = array.find(element)
+  return `imdbID`
+}
 
 /**
  * filterByGenre()
@@ -92,7 +105,10 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(genre) {
+  const result = genre.filter(movies)
+  return `genre`
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +134,9 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  const result = movies.filter(year)
+}
 
 /**
  * checkMinMetascores()
