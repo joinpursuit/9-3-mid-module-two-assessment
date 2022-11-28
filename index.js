@@ -30,8 +30,13 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
-
+//function getAllMovieTitles() {}
+const getAllMovieTitles = (movies)=>{
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'//error message 
+  }
+  return movies.map((movie) => movie.title)//using the map method to return movie.title in a new arry. 
+}
 /**
  * checkIfAnyMovieHasRating()
  * -----------------------------
@@ -50,8 +55,13 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
-
+//function checkIfAnyMovieHasRating() {}
+const checkIfAnyMovieHasRating = (movies,rating = 'G') =>{
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'//error message
+  }
+  return movies.some ((movie) => movie.rated === rating)//using some method to check if a specific element is true. in this case we are  checking if movie.rated is equal to rating and if it is not it will output the default value 'G'
+}
 /**
  * findById()
  * -----------------------------
@@ -68,8 +78,14 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
-
+//function findById() {}
+const findById = (movies,id) =>{
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'//error message
+  }
+  return movies.find((movie) => movie.imdbID === id)|| null
+  //using the find method to find the first value in the object that is true by checking if => movie.imdbID === id, if it is not it will return null 
+} 
 /**
  * filterByGenre()
  * -----------------------------
@@ -92,7 +108,17 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+//function filterByGenre() {}
+const movieGenre = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase()// created a helper function to format genre. Used the array methods toUpperCase method to capitalize the string at index 0,TolowerCase method to lowercase the remianing string from the slice method and slice(1)which will removes string starting from the index
+
+const filterByGenre = (movies,genre) =>{
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'// error message
+  }
+  return movies.filter((movie) => movie.genre.includes(movieGenre(genre))) || []//using the filter method which is checking if genre is equal to movie.genre. Movie.genre is a string with one or more genre so we use .includes method to find a specific genre amongst the string of movie.genre. if no genre is found it will output an empty oject.   
+}
+
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,8 +144,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
-
+//function getAllMoviesReleasedAtOrBeforeYear() {}
+const getAllMoviesReleasedAtOrBeforeYear = (movies,year) => {
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'//error message
+  }
+  return movies.filter((movie) => movie.released.slice(7) <= year)
+  //we use the filter method to find all elements in the object that is less than or equal to year in the movies object. movies.released is a string with the day,month and year. we only want the year so i used .slice method 7 to access only the year 
+}
 /**
  * checkMinMetascores()
  * -----------------------------
@@ -134,8 +166,14 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
-
+//function checkMinMetascores() {}
+const checkMinMetascores = (movies,metascore) => {
+  if(!movies.length){//if object is empty it will throw an error
+    throw 'The movies object is empty'//error message 
+  }
+  return movies.every((movie) => +movie.metascore > metascore)
+  //using the every method to check every element in the object that return true if movie.metascore is less than metascore. movie.score is a string. Used unary operator to convert a string to a number
+}
 /**
  * getRottenTomatoesScoreByMovie()
  * -----------------------------
@@ -160,8 +198,15 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+//function getRottenTomatoesScoreByMovie() {}
+const getRottenTomatoesScoreByMovie = (movies)=>{
 
+if(movies.length === 0){//if object is empty it will throw an error
+  throw 'this is an empty object'//error message
+}
+return movies.map((movie =>{
+  return {[movie.title]: movie.ratings.find((element => element.source ===  "Rotten Tomatoes")).value}}))//using map method to return a new array of movie.title which is the key and the value is going to be acced by using the find method to find the first instance it meets the condition.the value "Rotten Tomatoes" will found by the accessing the key, source which is equal to rotten tomatoes in the movies object
+}
 // Do not change anything below this line.
 module.exports = {
   getAllMovieTitles,
@@ -172,3 +217,4 @@ module.exports = {
   getAllMoviesReleasedAtOrBeforeYear,
   getRottenTomatoesScoreByMovie,
 };
+
