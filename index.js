@@ -30,7 +30,11 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (!movies.length)
+  throw "No Movies"
+  return movies.map(movie => movie.title)
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +54,12 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating="G") {
+  if (!movies.length)
+  throw 'No Movies'
+  // checks if movies contains at least movie is rated, "rating"
+  return movies.some(movie => movie.rated === rating)
+}
 
 /**
  * findById()
@@ -68,7 +77,17 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (!movies.length){
+    throw "No Movies"
+  }
+  // checks if movies has a movie that has the same imdbID as the given "id"
+  let foundMovie = movies.find(movie => movie.imdbID === id)
+  if (!foundMovie) { // if foundMovie is falsey at this point we didn't find anything.
+    return null
+  }
+  return foundMovie
+}
 
 /**
  * filterByGenre()
@@ -92,7 +111,17 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (!movies.length) 
+  throw "no Movies"
+  // filters movies that have the same genre as the given  "genre". movie.genre is a string of multiple genres
+  // I split the string into an array and used find to search for the given "genre". Uppercase/lowerCase to make sure it is case senstive to the format we want. 
+  matchedMovies = movies.filter(movie => (movie.genre.split(", ").find(genres => genres === genre[0].toUpperCase() + genre.slice(1).toLowerCase())))
+  if (!matchedMovies.length){
+    return []
+  }
+  return matchedMovies
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +147,13 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (!movies.length)
+    throw "No Movies"
+    // released string format "day(string) month year" I split the string and took the last element in the released array which would be the year.
+    return movies.filter(movie => Number(movie.released.split(" ")[movie.released.split(" ").length-1])<= year)
+  
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +169,12 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (!movies.length)
+  throw "No Movies"
+  //true or false if every movie.metascore is greater than or equal to the minimum meta score
+  return movies.every(movie => Number(movie.metascore) >= metascore)
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +200,13 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (!movies.length)
+  throw "no movies"
+  // gives us a new array of objects only containing the title and rotten tomato score.
+  //Object literal. I used find on movie.ratings to search for the rating that was given by rotten tomatoes. i then took the value from object and that is going to be the value mapped in our new array.
+  return movies.map(movie => ({[movie.title]:movie.ratings.find(rating=>rating.source === "Rotten Tomatoes").value}))
+}
 
 // Do not change anything below this line.
 module.exports = {
