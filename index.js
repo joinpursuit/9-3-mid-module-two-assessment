@@ -88,7 +88,7 @@ const checkIfAnyMovieHasRating = (movies, rating="G") =>{
  */
 const findById = (movies, id) =>{
   noMoviesError(movies);
-  return !movies.find( movie =>  movie.imdbID === id ) ? null : movies.find( movie =>  movie.imdbID === id )
+  return movies.find( movie =>  movie.imdbID === id) || null 
 };
 
 /**
