@@ -3,7 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
-const exampleMovies = require("./movies");
+const exampleMovies = require('./movies');
 // Do not change the line above.
 
 /**
@@ -31,11 +31,11 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
-  let list = movies.map((movie => movie.title));
-  if (list.length === 0){
-    throw 'Error: No Movies Found'
-  }
-  return list
+	let list = movies.map((movie) => movie.title);
+	if (list.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return list;
 }
 
 /**
@@ -57,11 +57,11 @@ function getAllMovieTitles(movies) {
  *  //> false
  */
 function checkIfAnyMovieHasRating(movies, rating = 'G') {
-  let list = movies.some(movie => movie.rated === rating);
-  if (movies.length === 0){
-    throw 'Error: No Movies Found.'
-  }
-  return list
+	let list = movies.some((movie) => movie.rated === rating);
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found.';
+	}
+	return list;
 }
 
 /**
@@ -81,11 +81,11 @@ function checkIfAnyMovieHasRating(movies, rating = 'G') {
     };
  */
 function findById(movies, id) {
-  let list = movies.find(movie => movie.imdbID.includes(id))
-  if (movies.length === 0){
-    throw 'Error: No Movies Found'
-  }
-  return list || null
+	let list = movies.find((movie) => movie.imdbID.includes(id));
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return list || null;
 }
 
 /**
@@ -110,13 +110,14 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {  
-  let list = movies.filter(movie =>
-  movie.genre.toLowerCase().includes(genre.toLowerCase()))
-  if (movies.length === 0){
-    throw 'Error: No Movies Found'
-  }
-  return list
+function filterByGenre(movies, genre) {
+	let list = movies.filter((movie) =>
+		movie.genre.toLowerCase().includes(genre.toLowerCase())
+	);
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return list;
 }
 
 /**
@@ -144,11 +145,11 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-  let list = (movies.filter(movie => movie.released.split(' ')[2] <= year))
-    if (movies.length === 0){
-      throw 'Error: No Movies Found'
-    }
-    return list
+	let list = movies.filter((movie) => movie.released.split(' ')[2] <= year);
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return list;
 }
 
 /**
@@ -166,11 +167,11 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  //>  false
  */
 function checkMinMetascores(movies, metascore) {
-  let list = (movies.every(movie => movie.metascore >= metascore))
-    if (movies.length === 0){
-      throw 'Error: No Movies Found'
-    }
-    return list
+	let list = movies.every((movie) => movie.metascore >= metascore);
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return list;
 }
 
 /**
@@ -198,25 +199,24 @@ function checkMinMetascores(movies, metascore) {
     ];
  */
 function getRottenTomatoesScoreByMovie(movies) {
-  if (movies.length === 0){
-    throw 'Error: No Movies Found'
-  }
-  return movies.map((movie)=>{
-    let list = movie.ratings.find(
-      (rating) => rating.source === "Rotten Tomatoes"
-    )
-    return {[movie.title]:list.value}
-  }
-  )
+	if (movies.length === 0) {
+		throw 'Error: No Movies Found';
+	}
+	return movies.map((movie) => {
+		let list = movie.ratings.find(
+			(rating) => rating.source === 'Rotten Tomatoes'
+		);
+		return { [movie.title]: list.value };
+	});
 }
 
 // Do not change anything below this line.
 module.exports = {
-  getAllMovieTitles,
-  checkIfAnyMovieHasRating,
-  findById,
-  filterByGenre,
-  checkMinMetascores,
-  getAllMoviesReleasedAtOrBeforeYear,
-  getRottenTomatoesScoreByMovie,
+	getAllMovieTitles,
+	checkIfAnyMovieHasRating,
+	findById,
+	filterByGenre,
+	checkMinMetascores,
+	getAllMoviesReleasedAtOrBeforeYear,
+	getRottenTomatoesScoreByMovie,
 };
