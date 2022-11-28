@@ -135,8 +135,6 @@ const filterByGenre = (movies, genre) => {
     ];
  */
 const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
-  //if the movie array is empty //> error
-  //if movie released year matches year param; return movie object
   const movieMatchesYear = (movies, year) => {
     return movies.filter((movie) => Number(movie.released.slice(7)) <= year)
   }
@@ -158,10 +156,7 @@ const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
  *  //>  false
  */
 const checkMinMetascores = (movies, metascore) => {
-  if (!movies.length) {
-    throw error
-  }
-  return movies.every((movie) => movie.metascore > metascore)
+  return (movies.length? movies.every((movie) => movie.metascore > metascore) : error )
 }
 
 /**
@@ -188,7 +183,12 @@ const checkMinMetascores = (movies, metascore) => {
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() { }
+const getRottenTomatoesScoreByMovie = (movies) => {
+  return (movies.length ? (movies.map((movie) => {
+    const rottenScore = movie.ratings.find(score => score.source === 'Rotten Tomatoes');
+    return { [movie.title]: rottenScore.value };
+  })) : error)
+}
 
 // Do not change anything below this line.
 module.exports = {
