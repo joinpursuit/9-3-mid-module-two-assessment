@@ -1,15 +1,16 @@
-/*
+ /*
   Do not change the line below. If you'd like to run code from this file, you may use the `exampleMovies` variable below to gain access to an array of movies.
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
-*/
-const exampleMovies = require("./movies");
-// Do not change the line above.
+ */
+ const exampleMovies = require("./movies");
+ // Do not change the line above.
 
-/**
+ /**
  * getAllMovieTitles()
  * -----------------------------
- * Returns all of titles from an array of movies. If the inputted `movies` array is empty, throw an error with a message.
+ * Returns all of titles from an array of movies. If the inputted `movies` array is empty, 
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @returns {string[]|Error} An array of strings, which are movie titles.
  *
@@ -30,12 +31,22 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+ const getAllMovieTitles = (movies) => {    // using arrow function
+  if( !movies.length) {
+    throw 'No movies / titles available'    // throw message if input movies array is empty
+  }
+  try {
+    return movies.map(movie => movie.title) // map method to return all movie titles
+  } catch ( Error ){                        // catch error if any while mapping or missing value in title
+    console.log( Error )
+  }
+ }
 
-/**
+ /**
  * checkIfAnyMovieHasRating()
  * -----------------------------
- * Returns a boolean, representing whether or not any of the movies has been given the provided rating. If the inputted `movies` array is empty, throw an error with a message.
+ * Returns a boolean, representing whether or not any of the movies has been given the provided rating. 
+ * If the inputted `movies` array is empty, throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} [rating="G"] - A movie rating. Defaults to "G".
  * @returns {boolean|Error} Returns `true` if a movie exists in the list with the given rating, otherwise returns `false`.
@@ -50,12 +61,23 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+ const checkIfAnyMovieHasRating = (movies, rating = 'G') => { // using arrow function and Default parameter G 
+  if( !movies.length) {
+    throw 'No movies to check for rating.'                    // throw message if input movies is empty
+  }
+  try {
+    return movies.some(movie => movie.rated === rating) // using some method to return true / false if movies have given rating or default rating
+                        
+  } catch ( Error ){                                       // catch error if any 
+    console.log( Error )
+  }
+ }
 
-/**
+ /**
  * findById()
  * -----------------------------
- * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty, throw an error with a message. If the ID does not match any movie, return `null`.
+ * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty, 
+ * throw an error with a message. If the ID does not match any movie, return `null`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} id - A unique `imdbID`.
  * @returns {Object|Error|null} The movie object with the matching `imdbID`.
@@ -68,12 +90,23 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+ const findById = (movies, id) => {                        // using arrow function
+  if( !movies.length) {
+    throw 'No movies were found.'                          // throw message if input movies array is empty
+  }
+  try {
+    return movies.find(movie => movie.imdbID === id) || null // find method to return full movie object or return null if id does not match
+                                    
+   } catch ( Error ){                                         // catch error if any
+     console.log( Error )
+   }
+ }
 
-/**
+ /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty, throw an error with a message. If no movies match the inputted `genre`, return `[]`.
+ * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty, 
+ * throw an error with a message. If no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]|Error} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -92,12 +125,24 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+ const filterByGenre = (movies,genre) => {          // using arrow function
+  if( !movies.length) {
+    throw 'No movies to filter by the given genre' // throw message if input movies array is empty
+  }
+  try {
+    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] 
+    // filter method to return movie object or return [] if genre does not match
+    // comparing genre in movie object as lowercase to parameter genre as lowercase
+   } catch ( Error ){                             // catch error if any
+     console.log( Error )
+   }
+ }
 
-/**
+ /**
  * getAllMoviesReleasedAtOrBeforeYear()
  * -----------------------------
- * Returns all movie objects with a `released` year equal to or less than the given year. If the movie array is empty, throw an error with a message.
+ * Returns all movie objects with a `released` year equal to or less than the given year. If the movie array is empty,
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {number} year - A year as a number. (e.g. 2000)
  * @returns {Object[]|Error} An array of movies where the `released` year is equal to or less than the inputted year.
@@ -118,12 +163,24 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+ const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => { // using arrow function
+  if( !movies.length) {
+    throw 'No movies released before the specified year.' // throw message if input movies array is empty
+  }
+  try {
+    return movies.filter(movie => movie.released.slice(-4) <= year) 
+    // filter method to return full movie object if year released match
+    // using slice(-4) to take only the year last 4 digits, ignoring date and month
+   } catch ( Error ){                                              // catch error if any
+     console.log( Error )
+   }
+ }
 
-/**
+ /**
  * checkMinMetascores()
  * -----------------------------
- * Returns either true or false depending whether all movies have a minimum metascore. If the movie array is empty, throw an error with a message.
+ * Returns either true or false depending whether all movies have a minimum metascore. If the movie array is empty, 
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {number} metascore - A minimum metascore number. (e.g. 80)
  * @returns {Boolean|Error} A boolean
@@ -134,14 +191,27 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+ const checkMinMetascores = (movies, metascore) => {                // using arrow function
+  if( !movies.length) {
+    throw 'No movies to check for metascore'                        // throw message if input movies array is empty
+  }
+  try {
+    return movies.every(movie => Number(movie.metascore) >= metascore) 
+    // every method to return true / false if all movies have a minimim metascore
+    // metascore value is string, so converting to Number type
+   } catch ( Error ){                                              // catch error if any
+     console.log( Error )
+   }
+ }
 
-/**
+ /**
  * getRottenTomatoesScoreByMovie()
  * -----------------------------
- * Transform each movie, returning an array of objects where the key is the title of the movie and the value is the score received from Rotten Tomatoes. If there are no movies, throw an error with a message.
+ * Transform each movie, returning an array of objects where the key is the title of the movie and 
+ * the value is the score received from Rotten Tomatoes. If there are no movies, throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {Object[]|Error} An array of movie objects where the key is the movie title and the value is the score received from Rotten Tomatoes.
+ * @returns {Object[]|Error} An array of movie objects where the key is the movie title and the 
+ * value is the score received from Rotten Tomatoes.
  * 
  * NOTE: You must use both the `.map()` method and the `.find()` method.
  *
@@ -160,10 +230,29 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+ const getRottenTomatoesScoreByMovie = (movies) => {        // using arrow function
+  if( !movies.length) {
+    throw 'No movies to check for source: "Rotten Tomatoes' // throw message if input movies array is empty
+  }
+  try {
+    return movies.map( movie => {        // using map method to get title as key for object
+    
+      let movieRatingObj = {};          // creating empty object to return transformed array
 
-// Do not change anything below this line.
-module.exports = {
+      let movieRating = movie.ratings.find( rating => rating.source === "Rotten Tomatoes");
+      // using find method to get Rotten Tomatoes score as value for object
+      movieRatingObj[movie.title] = movieRating.value;
+  
+      return movieRatingObj;
+    });
+    
+  } catch ( Error ){          // catch error if any
+     console.log( Error )
+  }
+ } 
+  
+ // Do not change anything below this line.
+ module.exports = {
   getAllMovieTitles,
   checkIfAnyMovieHasRating,
   findById,
@@ -171,4 +260,4 @@ module.exports = {
   checkMinMetascores,
   getAllMoviesReleasedAtOrBeforeYear,
   getRottenTomatoesScoreByMovie,
-};
+ };
