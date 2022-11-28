@@ -144,8 +144,7 @@ const filterByGenre = (movies, genre) => {
  */
 const getAllMoviesReleasedAtOrBeforeYear = (movies, year) =>{
   noMoviesError(movies);
-  return  movies.filter( element => { return Number( element.released.split(" ").reverse()[ 0 ] ) <= year } );
-
+  return  movies.filter( element => Number( element.released.split(" ").reverse()[ 0 ] ) <= year );
 };
 
 /**
