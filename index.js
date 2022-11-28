@@ -83,7 +83,8 @@ function findById(movies, id) {
   if(movies.length==0){
     throw "Input movies"
   }
-  return movies.some(movie => movie.imdbID == id) ? movies.find(movie => movie.imdbID == id) : null;
+  const foundMovie =  movies.find(movie => movie.imdbID == id)
+  return foundMovie ? foundMovie : null;
 }
 
 /**
