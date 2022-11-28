@@ -208,9 +208,12 @@ function getRottenTomatoesScoreByMovie(movies) {
     throw 'No movies availble in this list';
   }
   return movies.map((movie) => {
+    let newObject = {};
     let tomatoRating = movie.ratings.find((rating) =>
       rating.source.includes('Rotten Tomatoes'),
     );
+    newObject[movie.title] = tomatoRating.value;
+    return newObject
   });
 }
 
