@@ -81,7 +81,13 @@ function checkIfAnyMovieHasRating(movies, rating="G") {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if(movies.length === 0){
+    throw "Error!"
+  }
+  const movieID = movies.find((movie) => movie.imdbID === id)
+  return movieID || null
+}
 
 /**
  * filterByGenre()
@@ -105,7 +111,25 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if(movies.length === 0){
+    throw 'Your cart is empty';
+  }
+  
+let foundMovies = []
+const result = movies.filter((movie) => movie.genre === movie.album)
+
+for (let movie of movies) {
+
+let lowGenres = movie.genre.toLowerCase()
+let lowGenre = genre.toLowerCase()
+
+if (lowGenres.includes(lowGenre)){
+  foundMovies.push(movie)
+}
+} 
+return foundMovies
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -131,7 +155,9 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear() {
+
+}
 
 /**
  * checkMinMetascores()
