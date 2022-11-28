@@ -30,8 +30,9 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {
+function getAllMovieTitles(movies) {
   let movieTitles = movies.map((movie)=> movie.title);
+
   return movieTitles;
 }
 
@@ -53,7 +54,13 @@ function getAllMovieTitles() {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating="G" ) {
+  
+  const hasRating =  movies.some((movie)=> {
+   return movie.rated === rating ; 
+  });
+  return hasRating;
+}
 
 /**
  * findById()
@@ -71,7 +78,11 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  
+  let foundById = movies.find(({imdbID})=> imdbID === id);
+  return (foundById || null);
+}
 
 /**
  * filterByGenre()
@@ -95,7 +106,13 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  const underThisGenre = movies.filter((movie) => {
+    return movie.genre.toLowerCase().includes(genre.toLowerCase());
+  });
+  return underThisGenre; 
+}
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -121,7 +138,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  const onOrBeforeThisYear = movies.filter((movie)=> {
+    let released = movie.released;
+    let releasedYear = released.slice(released.length-4);
+    return Number(releasedYear) <= year
+  });
+  return onOrBeforeThisYear;
+}
 
 /**
  * checkMinMetascores()
@@ -137,7 +161,12 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  const hasMinMetaScore = movies.every((movie)=>{
+    return Number(movie.metascore) >= metascore
+  });
+  return hasMinMetaScore
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
