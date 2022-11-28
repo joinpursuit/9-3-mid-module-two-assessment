@@ -210,18 +210,19 @@ function checkMinMetascores(movie, metascore) {
     ];
  */
 function getRottenTomatoesScoreByMovie(movies) {
-if(!movies.length){
-  throw "Error: movies array is empty!"
+  if (!movies.length){
+    throw "Error: movies array is empty!"
+  }
+  return movies.map((movie)=>{
+    let movieTitle = movie.title;
+   
+    let movieRating = movie.ratings.find((rating)=> rating.source === `Rotten Tomatoes`);
+    movieRating = movieRating.value;
+    return {[movieTitle] : movieRating};
+  });
 }
-return movies.map((movie)=>{
-  let movieTitle = movie.title;
-  let movieRating = movie.rating.find((rating)=>
-    rating.source === "Rotten Tomatoes"
-  );
-movieRating=movieRating.value;
-return {[movieTitle] : movieRating} ;
-}
-)}
+
+
 
 // Do not change anything below this line.
 module.exports = {
