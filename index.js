@@ -73,7 +73,7 @@
   }
  }
 
-/**
+ /**
  * findById()
  * -----------------------------
  * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty, 
@@ -130,7 +130,9 @@
     throw 'No movies to filter by the given genre' // throw message if input movies array is empty
   }
   try {
-    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] // filter method to return movie object or return [] if genre does not match
+    return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || [] 
+    // filter method to return movie object or return [] if genre does not match
+    // comparing genre in movie object as lowercase to parameter genre as lowercase
    } catch ( Error ){                             // catch error if any
      console.log( Error )
    }
@@ -166,7 +168,9 @@
     throw 'No movies released before the specified year.' // throw message if input movies array is empty
   }
   try {
-    return movies.filter(movie => movie.released.slice(-4) <= year) // filter method to return full movie object if year released match
+    return movies.filter(movie => movie.released.slice(-4) <= year) 
+    // filter method to return full movie object if year released match
+    // using slice(-4) to take only the year last 4 digits, ignoring date and month
    } catch ( Error ){                                              // catch error if any
      console.log( Error )
    }
@@ -192,7 +196,9 @@
     throw 'No movies to check for metascore'                        // throw message if input movies array is empty
   }
   try {
-    return movies.every(movie => Number(movie.metascore) >= metascore) // every method to return true / false if all movies have a minimim metascore
+    return movies.every(movie => Number(movie.metascore) >= metascore) 
+    // every method to return true / false if all movies have a minimim metascore
+    // metascore value is string, so converting to Number type
    } catch ( Error ){                                              // catch error if any
      console.log( Error )
    }
