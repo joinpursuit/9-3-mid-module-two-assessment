@@ -80,7 +80,13 @@ function checkIfAnyMovieHasRating(movies, rating = 'G') {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  let list = movies.find(movie => movie.imdbID.includes(id))
+  if (movies.length === 0){
+    throw 'Error: No Movies Found'
+  }
+  return list || null
+}
 
 /**
  * filterByGenre()
@@ -104,7 +110,8 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre() {
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
