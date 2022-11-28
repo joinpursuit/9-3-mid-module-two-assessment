@@ -31,9 +31,9 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-const getAllMovieTitles = (movies) => {
+ const getAllMovieTitles = (movies) => {
   if( !movies.length) {
-    throw 'No movies / titles available'  // throw error if input movies array is empty
+    throw 'No movies / titles available'  // throw message if input movies array is empty
   }
   try {
     return movies.map(movie => movie.title) // map method to return array of titles
@@ -63,14 +63,14 @@ const getAllMovieTitles = (movies) => {
  */
  const checkIfAnyMovieHasRating = (movies, rating = 'G') => { // Default parameter
   if( !movies.length) {
-    throw 'No movies to check for rating.'          // throw error if input movies is empty
+    throw 'No movies to check for rating.'          // throw message if input movies is empty
   }
   try {
     return movies.some(movie => movie.rated === rating) // some method to return true / false if some movies have given rating or default rating
   } catch ( Error ){                  // catch error if any 
     console.log( Error )
   }
-}
+ }
 
 /**
  * findById()
@@ -89,7 +89,16 @@ const getAllMovieTitles = (movies) => {
       // Toy Story 4
     };
  */
-function findById() {}
+ const findById = (movies, id) => {
+  if( !movies.length) {
+    throw 'No movies were found.' // throw message if input movies array is empty
+  }
+  try {
+    return movies.find(movie => movie.imdbID === id) || null // find method to return full movie object or return null if id does not match
+   } catch ( Error ){               // catch error if any
+     console.log( Error )
+   }
+ }
 
 /**
  * filterByGenre()
