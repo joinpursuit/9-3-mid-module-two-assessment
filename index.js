@@ -57,13 +57,12 @@ function getAllMovieTitles(movies) {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating(movies, rating = 'G') {
-  if (!movies.length) {
-    throw `There are no movies`;
-  }
-  return movies.some((movie) => movies.rated === rating);
+function checkIfAnyMovieHasRating(movies, rating) {
+if (!movies.length){
+  throw "There are no movies"
 }
-// return and refeactor!
+return movies.some((movie => movie.rated === rating || "G"))
+}
 /**
  * findById()
  * -----------------------------
