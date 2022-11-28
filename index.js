@@ -9,7 +9,8 @@ const exampleMovies = require("./movies");
 /**
  * getAllMovieTitles()
  * -----------------------------
- * Returns all of titles from an array of movies. If the inputted `movies` array is empty, throw an error with a message.
+ * Returns all of titles from an array of movies. If the inputted `movies` array is empty, 
+ * throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @returns {string[]|Error} An array of strings, which are movie titles.
  *
@@ -30,12 +31,22 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+const getAllMovieTitles = (movies) => {
+  if( !movies.length) {
+    throw 'No movies / titles available'  // throw error if input movies array is empty
+  }
+  try {
+    return movies.map(movie => movie.title) // map method to return array of titles
+  } catch ( Error ){                        // catch error if any while mapping or missing title
+    console.log( Error )
+  }
+}
 
 /**
  * checkIfAnyMovieHasRating()
  * -----------------------------
- * Returns a boolean, representing whether or not any of the movies has been given the provided rating. If the inputted `movies` array is empty, throw an error with a message.
+ * Returns a boolean, representing whether or not any of the movies has been given the provided rating. 
+ * If the inputted `movies` array is empty, throw an error with a message.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} [rating="G"] - A movie rating. Defaults to "G".
  * @returns {boolean|Error} Returns `true` if a movie exists in the list with the given rating, otherwise returns `false`.
@@ -55,7 +66,8 @@ function checkIfAnyMovieHasRating() {}
 /**
  * findById()
  * -----------------------------
- * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty, throw an error with a message. If the ID does not match any movie, return `null`.
+ * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty, 
+ * throw an error with a message. If the ID does not match any movie, return `null`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} id - A unique `imdbID`.
  * @returns {Object|Error|null} The movie object with the matching `imdbID`.
