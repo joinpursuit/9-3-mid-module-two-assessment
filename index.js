@@ -115,7 +115,7 @@ const findById = (movies, id) =>{
  */
 const filterByGenre = (movies, genre) => {
   noMoviesError(movies);
-  return movies.filter( element => element.genre.includes(`${genre[0].toUpperCase()}${genre.slice(1, (genre.length - 1)).toLowerCase()}` ) ); 
+  return movies.filter( element => element.genre.toLowerCase().includes(`${genre.toLowerCase()}`) ); 
 };
 
 /**
