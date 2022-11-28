@@ -166,7 +166,13 @@ const getAllMoviesReleasedAtOrBeforeYear = (movies,year) => {
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+const checkMinMetascores = (movies,metascore) => {
+  if (!movies.length){
+    throw "Sorry,no movies"
+  }
+  let findTheScore = movies.every(movie => Number(movie.metascore) >= metascore)
+  return findTheScore
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
