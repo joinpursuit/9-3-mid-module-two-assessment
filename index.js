@@ -63,7 +63,7 @@ if (!movies.length){
 }
 return movies.some((movie) => movies.rated === rating)
 }
-
+// return and refeactor!
 /**
  * findById()
  * -----------------------------
@@ -80,7 +80,13 @@ return movies.some((movie) => movies.rated === rating)
       // Toy Story 4
     };
  */
-function findById() {}
+const findById = (movies,id) => {
+  if (!movies.length){
+    throw `There are no movies found with the given ID,we apologize for any inconvenience`
+  }
+  let find = movies.find(movie => movie.imdbID == id)
+  return find || null
+}
 
 /**
  * filterByGenre()
