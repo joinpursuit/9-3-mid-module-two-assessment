@@ -35,7 +35,7 @@ function getAllMovieTitles(movies) {
   if (!movies.length) {
     //throw message here 
     throw `There are no movies at this time we apologize for any inconvenience.`
-  } //
+  } //return here
   return movies.map ((movie) => movie.title)
 } 
 
@@ -57,7 +57,12 @@ function getAllMovieTitles(movies) {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating( movies,rating = "G") {
+if (!movies.length){
+  throw `There are no movies`
+}
+return movies.some((movie) => movies.rated === rating)
+}
 
 /**
  * findById()
