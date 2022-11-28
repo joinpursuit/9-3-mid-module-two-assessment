@@ -31,7 +31,7 @@ const exampleMovies = require("./movies");
     ];
  */
 const getAllMovieTitles = (movies) => {
-  return  (movies.length ? movies.map(movie => movie.title) : error)
+  return (movies.length ? movies.map(movie => movie.title) : error)
 }
 
 /**
@@ -52,7 +52,9 @@ const getAllMovieTitles = (movies) => {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+const checkIfAnyMovieHasRating = (movies, rating = 'G') => {
+  return (movies.length ? movies.some(movie => movie.rated === rating) : error)
+ }
 
 /**
  * findById()
@@ -70,7 +72,23 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+const findById = (movies, id) => {
+  if (!movies.length) {
+    throw error
+  }
+  const foundById = movies.find((movie) => movie.imdbID === id);
+  
+  return (foundById ? foundById : null);
+
+}
+// (movies.length ? (movies.find(movie => movie.imdbID === id)) : error)
+
+  // try {
+  //   return (movies.length ? movies.find(movie => movie.imdbID === id) : error)
+  // } finally {
+  //   return null
+  //}
+  
 
 /**
  * filterByGenre()
@@ -94,7 +112,7 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre() { }
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -120,7 +138,7 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear() { }
 
 /**
  * checkMinMetascores()
@@ -136,7 +154,7 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores() { }
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -162,7 +180,7 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie() { }
 
 // Do not change anything below this line.
 module.exports = {
