@@ -30,7 +30,14 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if( movies === []){
+    throw "Error."
+  }
+  return movies.map(movie => movie.title)
+}
+//movies.map() checks helps create a new array from the movies array with the parameters I set which in this case I target with movie.title. 
+//I also ensure that if the movies array is eampty an error messege should be thrown.
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +57,15 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if(!movies.length){
+    throw "No rating"
+  }
+  return movies.some(movie => movie.rated === rating )
+}
+
+//movies.some() checks the array for the movies with certian critera in this case being the rating of G. 
+//We then check if the movie we are checking has been rated G by doing movie.rated.
 
 /**
  * findById()
@@ -68,7 +83,18 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies,id) {
+  if(!id){
+    throw null
+  }
+  if(movies !== movies.length){
+    throw "Empty array."
+  }
+  return movies.find(movie => movie.imdb === id)
+}
+
+// We start by creating our errors which says if there is no id you'll thorw a null messge. The if movies has a length of zero or is empty you must throw that the array is empty.
+// We then write the code to target movies with and imdb id equivilent to the id in question in our parameters. Returning the movie we are seeking. 
 
 /**
  * filterByGenre()
@@ -92,7 +118,7 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -160,7 +186,12 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if(!movies){
+    throw console.log("error")
+  }
+  return movies.map((movie) => { return {[movie.title]: movie.ratings.find(ratingObj => ratingObj.source === "Rotten Tomatoes").value}})
+}
 
 // Do not change anything below this line.
 module.exports = {
