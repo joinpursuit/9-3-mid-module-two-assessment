@@ -54,7 +54,7 @@ const getAllMovieTitles = (movies) => {
  */
 const checkIfAnyMovieHasRating = (movies, rating = 'G') => {
   return (movies.length ? movies.some(movie => movie.rated === rating) : error)
- }
+}
 
 /**
  * findById()
@@ -77,18 +77,11 @@ const findById = (movies, id) => {
     throw error
   }
   const foundById = movies.find((movie) => movie.imdbID === id);
-  
+
   return (foundById ? foundById : null);
 
 }
-// (movies.length ? (movies.find(movie => movie.imdbID === id)) : error)
 
-  // try {
-  //   return (movies.length ? movies.find(movie => movie.imdbID === id) : error)
-  // } finally {
-  //   return null
-  //}
-  
 
 /**
  * filterByGenre()
@@ -112,7 +105,10 @@ const findById = (movies, id) => {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() { }
+const filterByGenre = (movies, genre) =>  {
+    const genreCase = genre.toLowerCase();
+return (movies.length ? movies.filter((movie) => movie.genre.toLowerCase().split(', ').includes(genreCase)) : error)
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
