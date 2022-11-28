@@ -31,9 +31,11 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
+  // error
   if (!movies.length) {
     throw Error
   }
+  //map to title
   return movies.map((movie) => movie.title)
 }
 
@@ -56,9 +58,11 @@ function getAllMovieTitles(movies) {
  *  //> false
  */
 function checkIfAnyMovieHasRating(movies, rating = "G") {
+  // error
   if (!movies.length) {
     throw Error
   }
+  // existing rating to be shown
   return movies.some((movie) => movie.rated === rating)
 }
 
@@ -79,9 +83,11 @@ function checkIfAnyMovieHasRating(movies, rating = "G") {
     };
  */
 function findById(movies, id) {
+  // error
   if (!movies.length) {
     throw Error
   }
+  // id does not match any movie? null
   return movies.find((movie) => movie.imdbID === id) || null
 }
 
@@ -108,9 +114,11 @@ function findById(movies, id) {
  *  //> []
  */
 function filterByGenre(movies, genre) {
+  // error
   if (!movies.length) {
     throw Error
   }
+  //case insensitive
   return movies.filter((movie) => movie.genre.toLowerCase().includes(genre.toLowerCase()))
 }
 
@@ -139,9 +147,11 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  //error
   if (!movies.length) {
     throw "Error";
   }
+  // released equal to or less than the year
   return movies.filter((movie) => movie.released.split(' ')[2] <= year)
 }
 
@@ -160,9 +170,11 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  //>  false
  */
 function checkMinMetascores(movies, metascore) {
+  // error
   if (!movies.length) {
     throw "Error";
   }
+  // minimum metascore
   return movies.every((movie) => movie.metascore >= metascore)
   
 }
@@ -192,9 +204,11 @@ function checkMinMetascores(movies, metascore) {
     ];
  */
 function getRottenTomatoesScoreByMovie(movies) {
+  // error
   if (!movies.length) {
     throw "Error";
   }
+  // key with title and rotten tomatoes score
   return movies.map((movie) => {
     let rottenTomato = movie.ratings.find((rating) => rating.source === "Rotten Tomatoes")
     return {[movie.title]: rottenTomato.value}
