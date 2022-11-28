@@ -134,7 +134,19 @@ return (movies.length ? movies.filter((movie) => movie.genre.toLowerCase().split
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() { }
+const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
+  //if the movie array is empty //> error
+  //if movie released year matches year param; return movie object
+const movieMatchesYear = (movies, year) => {
+  return movies.filter((movie) => Number(movie.released.slice(7)) <= year )
+}
+return (movies.length ? movieMatchesYear(movies, year) : error)
+}
+
+ 
+
+
+
 
 /**
  * checkMinMetascores()
