@@ -61,7 +61,16 @@ const getAllMovieTitles = (movies) => {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+ const checkIfAnyMovieHasRating = (movies, rating = 'G') => { // Default parameter
+  if( !movies.length) {
+    throw 'No movies to check for rating.'          // throw error if input movies is empty
+  }
+  try {
+    return movies.some(movie => movie.rated === rating) // some method to return true / false if some movies have given rating or default rating
+  } catch ( Error ){                  // catch error if any 
+    console.log( Error )
+  }
+}
 
 /**
  * findById()
