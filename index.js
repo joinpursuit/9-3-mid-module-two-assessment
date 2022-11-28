@@ -157,12 +157,17 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
     throw "Error: movies array is empty!"
   }
   return movies.filter((movie)=> {
-   const splitYear =movie.released.split("")
-   return parseInt(splitYear[2])<= year
-  })
+   let releasedYear =movie.released.substring
+   (movie.released.length-4, 
+    movie.released.length);
+  
+  return Number(releasedYear)<=year;
+});
+  };
+
 
  
-}
+
 
 /**
  * checkMinMetascores()
