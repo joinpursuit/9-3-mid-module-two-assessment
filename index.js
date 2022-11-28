@@ -3,8 +3,8 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
-const movies = require("./movies");
-const exampleMovies = require("./movies");
+const movies = require('./movies');
+const exampleMovies = require('./movies');
 // Do not change the line above.
 
 /**
@@ -33,11 +33,11 @@ const exampleMovies = require("./movies");
  */
 function getAllMovieTitles(movies) {
   if (!movies.length) {
-    //throw message here 
-    throw `There are no movies at this time we apologize for any inconvenience.`
+    //throw message here
+    throw `There are no movies at this time we apologize for any inconvenience.`;
   } //return here
-  return movies.map ((movie) => movie.title)
-} 
+  return movies.map((movie) => movie.title);
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -57,11 +57,11 @@ function getAllMovieTitles(movies) {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating( movies,rating = "G") {
-if (!movies.length){
-  throw `There are no movies`
-}
-return movies.some((movie) => movies.rated === rating)
+function checkIfAnyMovieHasRating(movies, rating = 'G') {
+  if (!movies.length) {
+    throw `There are no movies`;
+  }
+  return movies.some((movie) => movies.rated === rating);
 }
 // return and refeactor!
 /**
@@ -80,13 +80,13 @@ return movies.some((movie) => movies.rated === rating)
       // Toy Story 4
     };
  */
-const findById = (movies,id) => {
-  if (!movies.length){
-    throw `There are no movies found with the given ID,we apologize for any inconvenience`
+const findById = (movies, id) => {
+  if (!movies.length) {
+    throw `There are no movies found with the given ID,we apologize for any inconvenience`;
   }
-  let find = movies.find(movie => movie.imdbID == id)
-  return find || null
-}
+  let find = movies.find((movie) => movie.imdbID == id);
+  return find || null;
+};
 
 /**
  * filterByGenre()
@@ -110,14 +110,15 @@ const findById = (movies,id) => {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-const filterByGenre = (movies,genre) => {
-  if (!movies.length)
-{
-  throw "Genre has no Match"
-}
-let find = movies.filter(movie => movie.genre.toUpperCase().includes(genre.toUpperCase()))
-return find
-}
+const filterByGenre = (movies, genre) => {
+  if (!movies.length) {
+    throw 'Genre has no Match';
+  }
+  let find = movies.filter((movie) =>
+    movie.genre.toUpperCase().includes(genre.toUpperCase()),
+  );
+  return find;
+};
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -143,14 +144,16 @@ return find
       }
     ];
  */
-const getAllMoviesReleasedAtOrBeforeYear = (movies,year) => {
-  let movieArray = []
-  if (!movies.length){
-    throw "Movies array is empty"
+const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
+  let movieArray = [];
+  if (!movies.length) {
+    throw 'Movies array is empty';
   }
-  let find = movies.filter(movie => Number(movie.released.substring(7)) <= year)
-  return find || movieArray
-}
+  let find = movies.filter(
+    (movie) => Number(movie.released.substring(7)) <= year,
+  );
+  return find || movieArray;
+};
 
 /**
  * checkMinMetascores()
@@ -166,13 +169,15 @@ const getAllMoviesReleasedAtOrBeforeYear = (movies,year) => {
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-const checkMinMetascores = (movies,metascore) => {
-  if (!movies.length){
-    throw "Sorry,no movies"
+const checkMinMetascores = (movies, metascore) => {
+  if (!movies.length) {
+    throw 'Sorry,no movies';
   }
-  let findTheScore = movies.every(movie => Number(movie.metascore) >= metascore)
-  return findTheScore
-}
+  let findTheScore = movies.every(
+    (movie) => Number(movie.metascore) >= metascore,
+  );
+  return findTheScore;
+};
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -198,7 +203,16 @@ const checkMinMetascores = (movies,metascore) => {
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (!movies.length) {
+    throw 'No movies availble in this list';
+  }
+  return movies.map((movie) => {
+    let tomatoRating = movie.ratings.find((rating) =>
+      rating.source.includes('Rotten Tomatoes'),
+    );
+  });
+}
 
 // Do not change anything below this line.
 module.exports = {
