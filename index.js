@@ -155,8 +155,20 @@ return foundMovies
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if(movies.length === 0){
+    throw "Error!"
+  }
 
+  let inputtedYear = []
+
+  for(let movie of movies){
+    let stringToNumber = Number(movie.released.slice(7))
+    if(stringToNumber <= year){
+      inputtedYear.push(movie)
+    }
+  }
+  return inputtedYear
 }
 
 /**
@@ -173,7 +185,13 @@ function getAllMoviesReleasedAtOrBeforeYear() {
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if(movies.length === 0){
+    throw "Error!"
+  }
+  const hasMetascore = movies.every((movie) => movie.metascore >= metascore)
+  return hasMetascore
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -199,7 +217,15 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if(movies.length === 0){
+    throw "Error!"
+  }
+  return movies.map((movie) => {
+    const rateInfo = movie.ratings.find((rating) => rating.source === 'Rotten Tomatoes')
+    return {[movie.title] : rateInfo.value}
+  }) 
+}
 
 // Do not change anything below this line.
 module.exports = {
