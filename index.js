@@ -30,7 +30,10 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (movies.length === 0) { throw "No movie title match" }
+  return movies.map(movies => `${movies.title}`)
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +53,12 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (movies.length === 0) { throw "No G rated movie" }
+  return movies.some(movies => movies.rated === rating)
+  //this runs through the rated data for the movies to find some of the movies aka the the G rated movies
+
+}
 
 /**
  * findById()
@@ -68,7 +76,15 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (movies.length === 0) { throw "No ID found" }
+  let movieId = movies.find(movies => movies.imdbID === id)
+  if (movieId === undefined)
+    return null
+  else return movieId
+
+
+}
 
 /**
  * filterByGenre()
@@ -92,7 +108,14 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+
+  if (movies.length === 0) { throw [] }
+
+  return movies.filter(movies => movies.genre.toLowerCase().split(", ").includes(genre.toLowerCase()))
+   //^-->returns desired movie genre w/ proper grammar settings aka Case-insensitive>toLowerCase()
+}
+  
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +141,12 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (movies.length === 0) { throw "Movie not found" }
+  return movies.filter(movies => Number(movies.released.slice(-4)) <= year)
+  //.slice(-4)->4 is used to count back the 4 numbers in a year;Number(),this converts value to a clean number
+//those numbers are either less than or equal to a desired year you are looking for
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +162,13 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.metascore === 0) { throw "Error" }
+  //if (movies.metascore === 60) { throw true }-> didn't work, setting seperate number values didnt make the return either true or false
+  return (movies.every(movies => movies.metascore >= metascore))
+
+
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +194,13 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) { throw "No movie score match" }
+
+  return movies.map((movies) => { return { [movies.title]: movies.ratings.find(scoreObj => scoreObj.source === "Rotten Tomatoes").value } })
+//score & value data need to return the desired score of the movie, pay attention to the movie.js doc to make sure you catch all the info you need
+
+}
 
 // Do not change anything below this line.
 module.exports = {
