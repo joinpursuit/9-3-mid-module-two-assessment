@@ -30,6 +30,7 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
+// creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, create and return a new array using map which will call all the element in the array but will only return the movie title as a new array
 function getAllMovieTitles(movies) {
   if (!movies.length) {
     throw 'There are no movies'
@@ -56,6 +57,7 @@ function getAllMovieTitles(movies) {
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
+// creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done return true if at least one element in the movies ratings array passes the condition 
 function checkIfAnyMovieHasRating(movies, rating = "G") {
   if(!movies.length) {
     throw "No rating listed"
@@ -79,6 +81,7 @@ function checkIfAnyMovieHasRating(movies, rating = "G") {
       // Toy Story 4
     };
  */
+//creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, use the find method and return the value of the first element in the movie.imdbID that paases the test. If that does not exist return null
 function findById(movies, id) {
   if (!movies.length) {
     throw "No Movies"
@@ -109,7 +112,8 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {
+    // creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, use the filter method to loop through the array this will return the newly created array with only the elements that pass the condition inside the function. Movie, genre is case sensitive so lowercase the string movie.genre. (Not sure how to use helper functions so I went back to what we've done previously.)
+    function filterByGenre(movies, genre) {
   if (!movies.length){
     throw "No movie genre found"
   }
@@ -140,6 +144,7 @@ function filterByGenre(movies, genre) {
       }
     ];
  */
+// creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, use the filter method to loop through the array this will return the newly created array with only the elements that pass the condition inside the function. We need to access the last element in the movie.released array so use the slice method to access this element. Then determine it is greater than or equal to the year
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   if (!movies.length){
     throw "No release date"
@@ -161,6 +166,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
+// creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, use the every method to loop through the array and check and returns every (all) element in the array that passes the condition, if true, return true; if false, return false 
 function checkMinMetascores(movies, metascore) {
   if (! movies.length){
     throw "No Metascore"
@@ -192,6 +198,7 @@ function checkMinMetascores(movies, metascore) {
       { "James and the Giant Peach": "91%" },
     ];
  */
+//creates a conditional statment that finds the number of elements in movies.length. The conditional asks, if this element is not found, throw an error message. Once that is done, use the map method to loop through the array i will return a new array using map which will call all the element in the array create a key value pair of the movie title and movie rating, the use find to access the first instance where there is a value of title and rating. Loop through the object ratingObj  use find to loop into the ratingObj because ratings is an object in an array of objects and return it as a new array 
 function getRottenTomatoesScoreByMovie(movies) {
   if (!movies.length){
     throw "No Rotten Tomato Score Provided"
