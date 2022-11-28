@@ -30,7 +30,13 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (movies.length === 0) {
+    throw "error"; 
+  }
+  let allMovies = movies.map(movie => movie.title) 
+  return allMovies;
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +56,12 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  return movies.some(movie => movie.rated === rating)
+}
 
 /**
  * findById()
@@ -68,7 +79,16 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  let answer = movies.find(movie => movie.imdbID === id);
+  if (answer === undefined) {
+    return null;
+  }
+  return answer;
+}
 
 /**
  * filterByGenre()
@@ -92,7 +112,22 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  let arr = [];
+  arr = movies.filter(movie => {
+    // first turing a string of movie genres into array 
+    let arrOfGenres = movie.genre.split(', ');
+    // checking if that array includes the given genre and making case-incesetive 
+    if (arrOfGenres.includes(genre[0].toUpperCase() + genre.slice(1).toLowerCase())) {
+      return movie;
+    }
+  })
+
+  return arr;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,8 +153,16 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  // within filter method turnig string into number and then comparing to a given year 
+  let arr = movies.filter(movie => Number(movie.released.slice(7)) <= year);
+  return arr;
+}
 
+//released: "21 Jun 2019"
 /**
  * checkMinMetascores()
  * -----------------------------
@@ -134,7 +177,13 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  // if movie's metascore has at least minimum score  
+  return movies.every(movie => Number(movie.metascore >= metascore));
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,9 +209,21 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) {
+    throw "error";
+  }
+  let arr = movies.map(movie => {
+    // finding Rotten Tomatos rating value within movie element first
+    let arr2 = movie.ratings.find(rating => rating.source === "Rotten Tomatoes"); 
+    // creating new object to insert titles of the movies as a key and rating as value 
+    let arr3 = {};
+    arr3[movie.title] = arr2.value;
+    return arr3;
+  })
+  return arr;
+}
 
-// Do not change anything below this line.
 module.exports = {
   getAllMovieTitles,
   checkIfAnyMovieHasRating,
