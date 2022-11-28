@@ -212,6 +212,7 @@ function getRottenTomatoesScoreByMovie(movies) {
     throw "Input array was empty.";
   }
   else{
+    //Maps each movie object to a returned array by accessing the title and ratings values. Finds the RT score from ratings.
     return movies.map(({ title, ratings }) => ({ [title]: ratings.find(r => r.source == "Rotten Tomatoes").value }));
   }
 }
