@@ -110,7 +110,13 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {
+function filterByGenre(movies, genre) {  
+  let list = movies.filter(movie =>
+  movie.genre.toLowerCase().includes(genre.toLowerCase()))
+  if (movies.length === 0){
+    throw 'Error: No Movies Found'
+  }
+  return list
 }
 
 /**
