@@ -115,7 +115,7 @@ const findById = (movies, id) =>{
  */
 const filterByGenre = (movies, genre) => {
   noMoviesError(movies);
-  return movies.filter( element => element.genre.toLowerCase().includes(`${genre.toLowerCase()}`) ); 
+  return movies.filter( element => element.genre.toLowerCase().split(', ').includes(`${genre.toLowerCase()}`) ); 
 };
 
 /**
@@ -192,7 +192,7 @@ const checkMinMetascores = (movies, metascore) =>{
  */
 const getRottenTomatoesScoreByMovie = (movies)=>{
   noMoviesError(movies);
-  return movies.map( movie =>  { return {[movie.title] : movie.ratings.find( rating => rating.source === "Rotten Tomatoes").value} } ); 
+  return movies.map( movie =>  { return {[movie.title] : movie.ratings.find( rating => rating.source.includes("Rotten Tomatoes")).value} } ); 
 };
 
 // Do not change anything below this line.
