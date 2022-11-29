@@ -43,7 +43,7 @@ describe("getAllMovieTitles()", () => {
   });
 });
 
-describe.only("checkIfAnyMovieHasRating()", () => {
+describe("checkIfAnyMovieHasRating()", () => {
   test("should use the `.some()` method", () => {
     const text = checkIfAnyMovieHasRating.toString();
     expect(text).toMatch(/\.some\(.*\)/s);
