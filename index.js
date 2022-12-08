@@ -167,7 +167,12 @@ const exampleMovies = require("./movies");
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+ function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) {
+    throw console.error()
+  }
+  return movies.every(meta => meta.metascore >= metascore)
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -193,8 +198,15 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
-
+    function getRottenTomatoesScoreByMovie(movies) {
+      if (movies.length === 0) {
+        throw console.error()
+      }
+      return movies.map((titles) => {
+        const source1 = titles.ratings.find((value) => value.source === 'Rotten Tomatoes')
+        return { [titles.title]: source1.value }
+      })
+    }
 // Do not change anything below this line.
 module.exports = {
   getAllMovieTitles,
